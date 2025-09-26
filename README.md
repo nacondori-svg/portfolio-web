@@ -1,5 +1,5 @@
 # Portafolio EST334 - Estadística Espacial
-**Estudiante:** [Tu nombre completo]
+**Estudiante:** Nelyda Ayde Condori Condori
 
 ## Contenido del Portafolio
 
