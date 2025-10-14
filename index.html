@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Académico EST334 - Estadística Espacial</title>
+    <title>Portafolio EST334 - Nelyda Condori</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #3b82f6;
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
             --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-card: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
-            --shadow-medium: 0 20px 60px rgba(0, 0, 0, 0.15);
-            --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.2);
-            --border-radius: 20px;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.2);
         }
 
         * {
@@ -29,268 +32,346 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--gradient-primary);
-            min-height: 100vh;
-            color: #1e293b;
+            color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         /* Animated Background */
-        .bg-animation {
+        .bg-particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .shape {
+        .particle {
             position: absolute;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
-            animation: float 6s ease-in-out infinite;
+            animation: float-particle 15s infinite ease-in-out;
         }
 
-        .shape:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: 0s; }
-        .shape:nth-child(2) { width: 120px; height: 120px; left: 80%; animation-delay: 2s; }
-        .shape:nth-child(3) { width: 60px; height: 60px; left: 60%; animation-delay: 4s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+        @keyframes float-particle {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
-        /* Header Enhancement */
+        /* Header Floating */
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 3rem 0;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-soft);
+            position: relative;
+            z-index: 100;
+            padding: 2rem 0;
         }
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .header-card {
+            max-width: 1400px;
+            margin: 0 auto 2rem;
             padding: 0 2rem;
         }
 
-        .student-badge {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            display: inline-flex;
+        .profile-banner {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2.5rem;
             align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-medium);
-            transform: translateY(-10px);
-            animation: slideDown 0.8s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(-10px); opacity: 1; }
+        .profile-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-primary);
         }
 
-        .student-badge .icon {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem;
-            border-radius: 50%;
-            font-size: 1.2rem;
+        .avatar-section {
+            position: relative;
         }
 
-        .student-info {
-            font-weight: 600;
-            font-size: 1.1rem;
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 30px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
         }
 
-        .header h1 {
+        .avatar-container::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border-radius: 28px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-icon {
+            font-size: 4rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 3.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background: var(--success);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--success);
+            animation: pulse-status 2s infinite;
+        }
+
+        @keyframes pulse-status {
+            0%, 100% { box-shadow: 0 0 0 2px var(--success); }
+            50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.3); }
+        }
+
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .student-name {
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 0.8rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: -0.02em;
-            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
-        .header-subtitle {
-            font-size: 1.3rem;
+        .student-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
             color: #64748b;
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            font-size: 0.95rem;
         }
 
-        @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        /* Enhanced Navigation */
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 4rem;
-        }
-
-        .nav-tabs {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            padding: 0.8rem;
-            border-radius: 60px;
-            display: flex;
-            gap: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .nav-tab {
-            background: transparent;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
+        .detail-item {
             display: flex;
             align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-item i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .course-title {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            margin-top: 0.5rem;
+        }
+
+        .course-title h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .course-title p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .actions-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            font-size: 1.2rem;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .theme-toggle {
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Navigation Pills */
+        .nav-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 50;
+        }
+
+        .nav-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 1rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 18px;
+            background: transparent;
+            color: #64748b;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 0.8rem;
             position: relative;
             overflow: hidden;
         }
 
-        .nav-tab::before {
+        .nav-btn i {
+            font-size: 1.3rem;
+        }
+
+        .nav-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
             transition: left 0.5s;
         }
 
-        .nav-tab:hover::before {
+        .nav-btn:hover::before {
             left: 100%;
         }
 
-        .nav-tab:hover {
+        .nav-btn:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: var(--gradient-primary);
             color: white;
-            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
         }
 
-        .nav-tab.active {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--primary-color);
-            font-weight: 600;
-            box-shadow: var(--shadow-medium);
-            transform: translateY(-2px);
-        }
-
-        .nav-tab i {
-            font-size: 1.2rem;
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem 4rem;
+            position: relative;
+            z-index: 10;
         }
 
         /* Unit Sections */
-        .unit {
+        .unit-content {
             display: none;
-            animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInSlide 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .unit.active {
+        .unit-content.active {
             display: block;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .unit-header {
-            background: var(--gradient-card);
-            padding: 3rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 3rem;
-            text-align: center;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .unit-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-
-        .unit-header h2 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .unit-header p {
-            color: #64748b;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* Enhanced Stats */
-        .stats {
+        /* Stats Dashboard */
+        .stats-dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .stat-card {
-            background: var(--gradient-card);
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
             border: 1px solid rgba(255, 255, 255, 0.8);
             position: relative;
             overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .stat-card::before {
@@ -299,305 +380,490 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: var(--gradient-primary);
         }
 
         .stat-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: var(--shadow-medium);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
         }
 
         .stat-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .stat-number {
-            font-size: 3rem;
+        .stat-value {
+            font-size: 2.5rem;
             font-weight: 800;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .stat-label {
             color: #64748b;
+            font-size: 0.95rem;
             font-weight: 500;
-            font-size: 1.1rem;
         }
 
-        /* Enhanced Task Cards */
-        .tasks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2.5rem;
+        /* Works Grid */
+        .works-section {
             margin-bottom: 3rem;
         }
 
-        .task-card {
-            background: var(--gradient-card);
-            border-radius: var(--border-radius);
+        .section-header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
             padding: 2.5rem;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            position: relative;
-            overflow: hidden;
+            text-align: center;
         }
 
-        .task-card::before {
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .section-header p {
+            color: #64748b;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .work-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .work-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 5px;
             background: var(--gradient-primary);
         }
 
-        .task-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .work-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .work-thumbnail {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
-            transition: left 0.6s;
+            height: 220px;
+            object-fit: cover;
+            background: var(--gradient-primary);
         }
 
-        .task-card:hover::after {
-            left: 100%;
-        }
-
-        .task-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-strong);
-        }
-
-        .task-header {
+        .work-icon-display {
+            width: 100%;
+            height: 220px;
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .task-icon {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            justify-content: center;
+            font-size: 5rem;
             color: white;
-            font-size: 1.5rem;
-            padding: 1rem;
-            border-radius: 15px;
-            margin-right: 1.5rem;
-            box-shadow: var(--shadow-soft);
         }
 
-        .task-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--primary-color);
+        .work-body {
+            padding: 2rem;
+        }
+
+        .work-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
             line-height: 1.3;
         }
 
-        .task-description {
+        .work-description {
             color: #64748b;
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
         }
 
-        .task-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 600;
+        .work-meta {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
             margin-bottom: 1.5rem;
         }
 
-        .status-pending {
-            background: linear-gradient(135deg, #fef3c7, #fcd34d);
-            color: #92400e;
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            font-size: 0.9rem;
         }
 
-        .status-completed {
-            background: linear-gradient(135deg, #dcfce7, #86efac);
-            color: #166534;
+        .meta-item i {
+            color: var(--primary);
         }
 
-        .status-in-progress {
-            background: linear-gradient(135deg, #dbeafe, #93c5fd);
-            color: #1e40af;
-        }
-
-        .task-links {
+        .work-actions {
             display: flex;
             gap: 1rem;
-            flex-wrap: wrap;
         }
 
-        .task-link {
-            display: inline-flex;
+        .work-btn {
+            flex: 1;
+            padding: 0.9rem 1.5rem;
+            border-radius: 15px;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
             align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 2rem;
+            justify-content: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
             background: var(--gradient-primary);
             color: white;
-            text-decoration: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        /* Upload Area */
+        .upload-area {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
             border-radius: 25px;
-            font-weight: 600;
-            transition: var(--transition);
-            font-size: 1rem;
-            box-shadow: var(--shadow-soft);
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            border: 3px dashed var(--primary);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .task-link::before {
+        .upload-area::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-primary);
         }
 
-        .task-link:hover::before {
-            left: 100%;
+        .upload-area:hover {
+            border-color: var(--secondary);
+            transform: scale(1.02);
+            box-shadow: var(--shadow-xl);
         }
 
-        .task-link:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
+        .upload-area.dragover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-color: var(--success);
         }
 
-        .task-link i {
-            font-size: 1.1rem;
+        .upload-icon {
+            font-size: 5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
         }
 
-        /* Enhanced Footer */
-        .footer {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 3rem 2rem;
-            margin-top: 5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: var(--shadow-soft);
+        .upload-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-info {
+        .upload-subtitle {
+            color: #64748b;
+            font-size: 1.05rem;
             margin-bottom: 2rem;
         }
 
-        .university-info {
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+        .file-input {
+            display: none;
         }
 
-        .course-info {
-            color: #64748b;
-            font-size: 1rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .social-link {
-            color: white;
-            font-size: 1.3rem;
-            padding: 1rem;
-            border-radius: 15px;
+        .upload-btn {
+            padding: 1.2rem 3rem;
+            border-radius: 20px;
+            border: none;
             background: var(--gradient-primary);
-            transition: var(--transition);
-            box-shadow: var(--shadow-soft);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-md);
         }
 
-        .social-link:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: var(--shadow-medium);
+        .upload-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav-tabs {
-                flex-direction: column;
-                padding: 1rem;
-                border-radius: 20px;
-            }
-            
-            .nav-tab {
-                justify-content: center;
-                padding: 1rem;
-            }
-            
-            .tasks-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 2rem 1rem;
-            }
-            
-            .unit-header {
-                padding: 2rem;
-            }
-            
-            .unit-header h2 {
-                font-size: 2rem;
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .student-badge {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.5rem;
-            }
+        /* Instructions Box */
+        .instructions {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));
+            border-left: 5px solid var(--warning);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
         }
 
-        /* Loading States */
-        .loading-overlay {
+        .instructions h3 {
+            color: #92400e;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .instructions ol {
+            margin-left: 1.5rem;
+            color: #78350f;
+        }
+
+        .instructions li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        /* Empty State */
+        .empty-state {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .empty-state p {
+            color: #64748b;
+            font-size: 1.05rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(5px);
-            display: none;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            max-width: 95%;
+            max-height: 95%;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: #dc2626;
+        }
+
+        .preview-container {
+            width: 100%;
+            height: 85vh;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .preview-container iframe,
+        .preview-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border: none;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-xl);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 3000;
+            min-width: 350px;
+            border-left: 5px solid var(--success);
+            animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .notification.show {
+            display: flex;
+        }
+
+        .notification.error {
+            border-left-color: #ef4444;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(500px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .notification-icon {
+            font-size: 1.8rem;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .notification-text {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 25px;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .loading.active {
+            display: block;
         }
 
         .spinner {
             width: 60px;
             height: 60px;
             border: 4px solid rgba(37, 99, 235, 0.1);
-            border-top: 4px solid var(--primary-color);
+            border-top: 4px solid var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
         }
 
         @keyframes spin {
@@ -605,530 +871,631 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Progress Bar */
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(37, 99, 235, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            margin: 1rem 0;
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .profile-banner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .actions-section {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-primary);
-            border-radius: 3px;
-            transition: width 1s ease;
-            width: 0%;
+        @media (max-width: 640px) {
+            .student-name {
+                font-size: 1.5rem;
+            }
+
+            .stats-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-banner {
+                padding: 2rem;
+            }
+
+            .section-header {
+                padding: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation">
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-    </div>
+    <!-- Background Particles -->
+    <div class="bg-particles" id="bgParticles"></div>
 
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner"></div>
-    </div>
+    <!-- Header Profile -->
+    <div class="header">
+        <div class="header-card">
+            <div class="profile-banner">
+                <div class="avatar-section">
+                    <div class="avatar-container">
+                        <i class="fas fa-user-graduate avatar-icon"></i>
+                    </div>
+                    <div class="status-badge"></div>
+                </div>
 
-    <header class="header">
-        <div class="header-content">
-            <div class="student-badge">
-                <div class="icon"><i class="fas fa-user-graduate"></i></div>
-                <div class="student-info">NELYDA AYDE CONDORI CONDORI | Código: 214483</div>
+                <div class="info-section">
+                    <h1 class="student-name">Nelyda Ayde Condori Condori</h1>
+                    <div class="student-details">
+                        <div class="detail-item">
+                            <i class="fas fa-id-card"></i>
+                            <span>Código: 214483</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-university"></i>
+                            <span>UNA Puno</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Semestre 2025-II</span>
+                        </div>
+                    </div>
+                    <div class="course-title">
+                        <h2><i class="fas fa-globe-americas"></i> EST334 - Estadística Espacial</h2>
+                        <p>Facultad de Ingeniería Estadística e Informática</p>
+                    </div>
+                </div>
+
+                <div class="actions-section">
+                    <div class="social-links">
+                        <a href="#" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                    <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
-            <h1><i class="fas fa-globe-americas"></i> EST334 - Estadística Espacial</h1>
-            <p class="header-subtitle">Portfolio Académico de Proyectos y Análisis Geoespaciales Avanzados</p>
         </div>
-    </header>
 
-    <div class="container">
-        <div class="nav-container">
-            <div class="nav-tabs">
-                <button class="nav-tab active" onclick="showUnit('unit1', this)">
+        <!-- Navigation -->
+        <div class="nav-wrapper">
+            <div class="nav-container">
+                <button class="nav-btn active" onclick="switchUnit('unit1', this)">
                     <i class="fas fa-chart-line"></i>
-                    <span>Unidad I</span>
+                    <span>Unidad I - Fundamentos</span>
                 </button>
-                <button class="nav-tab" onclick="showUnit('unit2', this)">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <span>Unidad II</span>
+                <button class="nav-btn" onclick="switchUnit('unit2', this)">
+                    <i class="fas fa-globe"></i>
+                    <span>Unidad II - Análisis Avanzado</span>
                 </button>
             </div>
         </div>
+    </div>
 
+    <!-- Main Content -->
+    <div class="main-container">
         <!-- Unit 1 -->
-        <div id="unit1" class="unit active">
-            <div class="unit-header">
-                <h2><i class="fas fa-chart-area"></i> Unidad I - Fundamentos de Análisis Espacial</h2>
-                <p>Conceptos fundamentales, métodos estadísticos básicos y primeras aproximaciones al análisis de datos geoespaciales</p>
-            </div>
-
-            <div class="stats">
+        <div id="unit1" class="unit-content active">
+            <!-- Stats Dashboard -->
+            <div class="stats-dashboard">
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
-                    <div class="stat-number" data-target="0">0</div>
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-file-alt stat-icon"></i>
+                    </div>
+                    <div class="stat-value" data-target="0">0</div>
                     <div class="stat-label">Trabajos Completados</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
-                    <div class="stat-number" data-target="0">0</div>
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-clock stat-icon"></i>
+                    </div>
+                    <div class="stat-value" data-target="0">0</div>
                     <div class="stat-label">En Desarrollo</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-chart-pie"></i></div>
-                    <div class="stat-number" data-target="0">0</div>
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-chart-pie stat-icon"></i>
+                    </div>
+                    <div class="stat-value" data-target="0">0</div>
                     <div class="stat-label">% Progreso</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-star"></i></div>
-                    <div class="stat-number" data-target="0">0</div>
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-star stat-icon"></i>
+                    </div>
+                    <div class="stat-value" data-target="0">0</div>
                     <div class="stat-label">Calificación Promedio</div>
                 </div>
             </div>
 
-            <div class="tasks-grid">
-                <div class="task-card">
-                    <div class="task-header">
-                        <div class="task-icon"><i class="fas fa-upload"></i></div>
-                        <div class="task-title">Área de Subida - Unidad I</div>
-                    </div>
-                    <div class="task-description">
-                        Espacio dedicado para subir todos los trabajos, proyectos, tareas y análisis correspondientes a la primera unidad del curso. Incluye ejercicios teóricos y prácticos.
-                    </div>
-                    <div class="task-status status-pending">
-                        <i class="fas fa-hourglass-half"></i>
-                        Esperando contenido
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <div class="task-links">
-                        <a href="#" class="task-link" onclick="handleUpload(this)">
-                            <i class="fas fa-plus-circle"></i> Subir Trabajo
-                        </a>
-                        <a href="#" class="task-link">
-                            <i class="fas fa-folder-open"></i> Ver Archivos
-                        </a>
-                    </div>
+            <!-- Upload Section -->
+            <div class="works-section">
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> Cómo agregar tus trabajos</h3>
+                    <ol>
+                        <li>Ve a tu repositorio: <strong>nacondori-svg/portfolio-web</strong></li>
+                        <li>Navega a la carpeta <strong>"trabajos"</strong></li>
+                        <li>Clic en <strong>"Add file" → "Upload files"</strong></li>
+                        <li>Arrastra o selecciona tus archivos (PDF, imágenes, documentos, código, etc.)</li>
+                        <li>Escribe un mensaje descriptivo del commit</li>
+                        <li>Clic en <strong>"Commit changes"</strong></li>
+                        <li>Actualiza <strong>trabajos.json</strong> con la información del nuevo trabajo</li>
+                        <li>¡Recarga esta página para ver tus trabajos! 🎉</li>
+                    </ol>
                 </div>
+
+                <div class="upload-area" id="uploadArea1">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3 class="upload-title">Subir Archivos - Unidad I</h3>
+                    <p class="upload-subtitle">Arrastra archivos aquí o selecciona desde tu computadora</p>
+                    <input type="file" id="fileInput1" class="file-input" multiple>
+                    <button class="upload-btn" onclick="document.getElementById('fileInput1').click()">
+                        <i class="fas fa-folder-open"></i> Seleccionar Archivos
+                    </button>
+                </div>
+
+                <div class="loading" id="loading1">
+                    <div class="spinner"></div>
+                    <p style="color: var(--dark); font-weight: 600;">Procesando archivos...</p>
+                </div>
+            </div>
+
+            <!-- Works Section -->
+            <div class="works-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-folder-open"></i> Mis Trabajos - Unidad I</h2>
+                    <p>Fundamentos de análisis espacial, conceptos básicos y primeras aproximaciones</p>
+                </div>
+                <div class="works-grid" id="unit1-works"></div>
             </div>
         </div>
 
         <!-- Unit 2 -->
-        <div id="unit2" class="unit">
-            <div class="unit-header">
-                <h2><i class="fas fa-globe"></i> Unidad II - Análisis Espacial Avanzado</h2>
-                <p>Métodos avanzados de análisis espacial, modelado geoestatístico y aplicaciones especializadas en estadística espacial</p>
-            </div>
-
-            <div class="stats">
+        <div id="unit2" class="unit-content">
+            <!-- Stats Dashboard -->
+            <div class="stats-dashboard">
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
-                    <div class="stat-number" data-target="0">0</div>
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-file-alt stat-icon"></i>
+                    </div>
+                    <div class="stat-value" data-target="0">0</div>
                     <div class="stat-label">Trabajos Completados</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
-                    <div class="stat-number" data-target="0">0</div>
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-clock stat-icon"></i>
+                    </div>
+                    <div class="stat-value" data-target="0">0</div>
                     <div class="stat-label">En Desarrollo</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-chart-pie"></i></div>
-                    <div class="stat-number" data-target="0">0</div>
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-chart-pie stat-icon"></i>
+                    </div>
+                    <div class="stat-value" data-target="0">0</div>
                     <div class="stat-label">% Progreso</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-star"></i></div>
-                    <div class="stat-number" data-target="0">0</div>
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-star stat-icon"></i>
+                    </div>
+                    <div class="stat-value" data-target="0">0</div>
                     <div class="stat-label">Calificación Promedio</div>
                 </div>
             </div>
 
-            <div class="tasks-grid">
-                <div class="task-card">
-                    <div class="task-header">
-                        <div class="task-icon"><i class="fas fa-upload"></i></div>
-                        <div class="task-title">Área de Subida - Unidad II</div>
-                    </div>
-                    <div class="task-description">
-                        Repositorio para proyectos avanzados de la segunda unidad. Incluye análisis geoestatísticos, modelado espacial y aplicaciones especializadas en el campo.
-                    </div>
-                    <div class="task-status status-pending">
-                        <i class="fas fa-hourglass-half"></i>
-                        Esperando contenido
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <div class="task-links">
-                        <a href="#" class="task-link" onclick="handleUpload(this)">
-                            <i class="fas fa-plus-circle"></i> Subir Trabajo
-                        </a>
-                        <a href="#" class="task-link">
-                            <i class="fas fa-folder-open"></i> Ver Archivos
-                        </a>
-                    </div>
+            <!-- Upload Section -->
+            <div class="works-section">
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> Cómo agregar tus trabajos</h3>
+                    <ol>
+                        <li>Ve a tu repositorio: <strong>nacondori-svg/portfolio-web</strong></li>
+                        <li>Navega a la carpeta <strong>"trabajos"</strong></li>
+                        <li>Clic en <strong>"Add file" → "Upload files"</strong></li>
+                        <li>Arrastra o selecciona tus archivos (PDF, imágenes, documentos, código, etc.)</li>
+                        <li>Escribe un mensaje descriptivo del commit</li>
+                        <li>Clic en <strong>"Commit changes"</strong></li>
+                        <li>Actualiza <strong>trabajos.json</strong> con la información del nuevo trabajo</li>
+                        <li>¡Recarga esta página para ver tus trabajos! 🎉</li>
+                    </ol>
                 </div>
+
+                <div class="upload-area" id="uploadArea2">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3 class="upload-title">Subir Archivos - Unidad II</h3>
+                    <p class="upload-subtitle">Arrastra archivos aquí o selecciona desde tu computadora</p>
+                    <input type="file" id="fileInput2" class="file-input" multiple>
+                    <button class="upload-btn" onclick="document.getElementById('fileInput2').click()">
+                        <i class="fas fa-folder-open"></i> Seleccionar Archivos
+                    </button>
+                </div>
+
+                <div class="loading" id="loading2">
+                    <div class="spinner"></div>
+                    <p style="color: var(--dark); font-weight: 600;">Procesando archivos...</p>
+                </div>
+            </div>
+
+            <!-- Works Section -->
+            <div class="works-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-globe"></i> Mis Trabajos - Unidad II</h2>
+                    <p>Análisis espacial avanzado, modelado geoestatístico y aplicaciones especializadas</p>
+                </div>
+                <div class="works-grid" id="unit2-works"></div>
             </div>
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-info">
-                <div class="university-info">
-                    <i class="fas fa-university"></i>
-                    Universidad Nacional del Altiplano
-                </div>
-                <div class="course-info">
-                    Facultad de Ingeniería Estadística e Informática | EST334 - Estadística Espacial | Semestre 2025-II
-                </div>
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="#" class="social-link" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
-            </div>
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div class="modal-content">
+            <div class="preview-container" id="previewContainer"></div>
         </div>
-    </footer>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span class="notification-icon" id="notificationIcon">✅</span>
+        <div class="notification-content">
+            <div class="notification-title" id="notificationTitle"></div>
+            <div class="notification-text" id="notificationText"></div>
+        </div>
+    </div>
 
     <script>
-        // Enhanced Unit Switching
-        function showUnit(unitId, tabElement) {
-            // Show loading
-            document.getElementById('loadingOverlay').style.display = 'flex';
-            
-            setTimeout(() => {
-                // Hide all units
-                document.querySelectorAll('.unit').forEach(unit => {
-                    unit.classList.remove('active');
-                });
+        // Configuration
+        const trabajosJsonPath = 'trabajos.json';
 
-                // Remove active class from all tabs
-                document.querySelectorAll('.nav-tab').forEach(tab => {
-                    tab.classList.remove('active');
-                });
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeParticles();
+            loadTrabajos();
+            setupUploadAreas();
+            animateOnScroll();
+        });
 
-                // Show selected unit
-                document.getElementById(unitId).classList.add('active');
-                tabElement.classList.add('active');
+        // Particles Background
+        function initializeParticles() {
+            const container = document.getElementById('bgParticles');
+            const particleCount = 15;
 
-                // Hide loading
-                document.getElementById('loadingOverlay').style.display = 'none';
-
-                // Animate stats
-                animateStats();
-
-                // Smooth scroll to content
-                document.querySelector('.unit.active').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }, 500);
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 60 + 20;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 15}s`;
+                container.appendChild(particle);
+            }
         }
 
-        // Enhanced Upload Handler
-        function handleUpload(element) {
-            const originalText = element.innerHTML;
-            element.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
-            element.style.pointerEvents = 'none';
+        // Switch Units
+        function switchUnit(unitId, button) {
+            document.querySelectorAll('.unit-content').forEach(unit => {
+                unit.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
             
+            document.getElementById(unitId).classList.add('active');
+            button.classList.add('active');
+
             setTimeout(() => {
-                element.innerHTML = originalText;
-                element.style.pointerEvents = 'auto';
-                
-                // Show a more professional notification
-                showNotification('Sistema de subida de archivos en desarrollo. Próximamente disponible.', 'info');
-            }, 2000);
+                window.scrollTo({ top: 300, behavior: 'smooth' });
+            }, 100);
         }
 
-        // Notification System
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <i class="fas fa-info-circle"></i>
-                <span>${message}</span>
-                <button onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
-            `;
-            
-            // Add notification styles
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: white;
-                padding: 1rem 1.5rem;
-                border-radius: 10px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-                border-left: 4px solid var(--primary-color);
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                min-width: 300px;
-                animation: slideInRight 0.3s ease;
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                if (notification.parentElement) {
-                    notification.style.animation = 'slideOutRight 0.3s ease';
-                    setTimeout(() => notification.remove(), 300);
+        // Load Trabajos
+        async function loadTrabajos() {
+            try {
+                const response = await fetch(trabajosJsonPath);
+                if (!response.ok) {
+                    showEmptyState('unit1-works');
+                    showEmptyState('unit2-works');
+                    return;
                 }
+                
+                const trabajos = await response.json();
+                displayTrabajos(trabajos);
+            } catch (error) {
+                console.error('Error loading trabajos:', error);
+                showEmptyState('unit1-works');
+                showEmptyState('unit2-works');
+            }
+        }
+
+        // Display Trabajos
+        function displayTrabajos(trabajos) {
+            const unit1Container = document.getElementById('unit1-works');
+            const unit2Container = document.getElementById('unit2-works');
+            
+            const unit1Works = trabajos.filter(t => t.unidad === 1);
+            const unit2Works = trabajos.filter(t => t.unidad === 2);
+
+            if (unit1Works.length === 0) {
+                showEmptyState('unit1-works');
+            } else {
+                unit1Container.innerHTML = '';
+                unit1Works.forEach(trabajo => {
+                    unit1Container.appendChild(createWorkCard(trabajo));
+                });
+            }
+
+            if (unit2Works.length === 0) {
+                showEmptyState('unit2-works');
+            } else {
+                unit2Container.innerHTML = '';
+                unit2Works.forEach(trabajo => {
+                    unit2Container.appendChild(createWorkCard(trabajo));
+                });
+            }
+        }
+
+        // Create Work Card
+        function createWorkCard(trabajo) {
+            const card = document.createElement('div');
+            card.className = 'work-card';
+
+            const extension = trabajo.archivo.split('.').pop().toLowerCase();
+            const icon = getFileIcon(extension);
+            const filePath = `trabajos/${trabajo.archivo}`;
+            const fileType = getFileType(extension);
+
+            const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+            
+            if (imageExtensions.includes(extension)) {
+                card.innerHTML = `
+                    <img src="${filePath}" alt="${trabajo.nombre}" class="work-thumbnail">
+                    <div class="work-body">
+                        <h3 class="work-title">${trabajo.nombre}</h3>
+                        <p class="work-description">${trabajo.descripcion || 'Sin descripción disponible'}</p>
+                        <div class="work-meta">
+                            <span class="meta-item"><i class="fas fa-calendar-alt"></i> ${trabajo.fecha || 'Sin fecha'}</span>
+                            <span class="meta-item"><i class="fas fa-file"></i> ${fileType}</span>
+                        </div>
+                        <div class="work-actions">
+                            <button class="work-btn btn-primary" onclick="viewFile('${filePath}', '${extension}')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <a href="${filePath}" download class="work-btn btn-secondary">
+                                <i class="fas fa-download"></i> Descargar
+                            </a>
+                        </div>
+                    </div>
+                `;
+            } else {
+                card.innerHTML = `
+                    <div class="work-icon-display">${icon}</div>
+                    <div class="work-body">
+                        <h3 class="work-title">${trabajo.nombre}</h3>
+                        <p class="work-description">${trabajo.descripcion || 'Sin descripción disponible'}</p>
+                        <div class="work-meta">
+                            <span class="meta-item"><i class="fas fa-calendar-alt"></i> ${trabajo.fecha || 'Sin fecha'}</span>
+                            <span class="meta-item"><i class="fas fa-file"></i> ${fileType}</span>
+                        </div>
+                        <div class="work-actions">
+                            <button class="work-btn btn-primary" onclick="viewFile('${filePath}', '${extension}')">
+                                <i class="fas fa-eye"></i> Ver
+                            </button>
+                            <a href="${filePath}" download class="work-btn btn-secondary">
+                                <i class="fas fa-download"></i> Descargar
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return card;
+        }
+
+        // Get File Icon
+        function getFileIcon(extension) {
+            const icons = {
+                'pdf': '📄', 'doc': '📝', 'docx': '📝',
+                'xls': '📊', 'xlsx': '📊', 'ppt': '📊', 'pptx': '📊',
+                'zip': '🗜️', 'rar': '🗜️',
+                'mp4': '🎥', 'avi': '🎥', 'mov': '🎥',
+                'mp3': '🎵', 'wav': '🎵',
+                'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️',
+                'txt': '📃',
+                'py': '🐍', 'js': '💛', 'html': '🌐', 'css': '🎨',
+                'r': '📈', 'rmd': '📈', 'R': '📈'
+            };
+            return icons[extension] || '📁';
+        }
+
+        // Get File Type
+        function getFileType(extension) {
+            const types = {
+                'pdf': 'PDF', 'doc': 'Word', 'docx': 'Word',
+                'xls': 'Excel', 'xlsx': 'Excel',
+                'ppt': 'PowerPoint', 'pptx': 'PowerPoint',
+                'zip': 'Comprimido', 'rar': 'Comprimido',
+                'mp4': 'Video', 'avi': 'Video', 'mov': 'Video',
+                'mp3': 'Audio', 'wav': 'Audio',
+                'jpg': 'Imagen', 'jpeg': 'Imagen', 'png': 'Imagen', 'gif': 'Imagen',
+                'txt': 'Texto',
+                'py': 'Python', 'js': 'JavaScript', 'html': 'HTML', 'css': 'CSS',
+                'r': 'R Script', 'rmd': 'R Markdown', 'R': 'R Script'
+            };
+            return types[extension] || extension.toUpperCase();
+        }
+
+        // Show Empty State
+        function showEmptyState(containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">📂</div>
+                    <h3>No hay trabajos aún</h3>
+                    <p>Los trabajos que subas aparecerán aquí automáticamente</p>
+                </div>
+            `;
+        }
+
+        // View File
+        function viewFile(filePath, extension) {
+            const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
+            const previewContainer = document.getElementById('previewContainer');
+            
+            if (imageExtensions.includes(extension)) {
+                previewContainer.innerHTML = `<img src="${filePath}" alt="Vista previa">`;
+            } else if (extension === 'pdf') {
+                previewContainer.innerHTML = `<iframe src="${filePath}"></iframe>`;
+            } else {
+                previewContainer.innerHTML = `
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 2rem;">
+                        <div style="font-size: 6rem;">${getFileIcon(extension)}</div>
+                        <h3 style="font-size: 2rem; color: var(--dark);">No se puede previsualizar este archivo</h3>
+                        <a href="${filePath}" download class="work-btn btn-primary" style="padding: 1.5rem 3rem; font-size: 1.2rem;">
+                            <i class="fas fa-download"></i> Descargar Archivo
+                        </a>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('modal').classList.add('active');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.getElementById('previewContainer').innerHTML = '';
+        }
+
+        // Setup Upload Areas
+        function setupUploadAreas() {
+            setupUploadArea('uploadArea1', 'fileInput1', 'loading1', 1);
+            setupUploadArea('uploadArea2', 'fileInput2', 'loading2', 2);
+        }
+
+        function setupUploadArea(areaId, inputId, loadingId, unit) {
+            const area = document.getElementById(areaId);
+            const input = document.getElementById(inputId);
+            const loading = document.getElementById(loadingId);
+
+            ['dragover', 'dragenter'].forEach(event => {
+                area.addEventListener(event, (e) => {
+                    e.preventDefault();
+                    area.classList.add('dragover');
+                });
+            });
+
+            ['dragleave', 'drop'].forEach(event => {
+                area.addEventListener(event, () => {
+                    area.classList.remove('dragover');
+                });
+            });
+
+            area.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const files = Array.from(e.dataTransfer.files);
+                if (files.length > 0) {
+                    handleFiles(files, loading, unit);
+                }
+            });
+
+            input.addEventListener('change', (e) => {
+                const files = Array.from(e.target.files);
+                if (files.length > 0) {
+                    handleFiles(files, loading, unit);
+                }
+                input.value = '';
+            });
+        }
+
+        // Handle Files
+        function handleFiles(files, loading, unit) {
+            loading.classList.add('active');
+            
+            setTimeout(() => {
+                loading.classList.remove('active');
+                const fileList = files.map(f => f.name).join(', ');
+                showNotification(
+                    'Archivos Seleccionados',
+                    `${fileList}. Para subirlos, usa "Add file" → "Upload files" en GitHub y actualiza trabajos.json`,
+                    'success'
+                );
+            }, 1500);
+        }
+
+        // Show Notification
+        function showNotification(title, message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const icon = type === 'success' ? '✅' : '⚠️';
+            
+            document.getElementById('notificationIcon').textContent = icon;
+            document.getElementById('notificationTitle').textContent = title;
+            document.getElementById('notificationText').textContent = message;
+            
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
             }, 5000);
         }
 
-        // Animate Statistics
-        function animateStats() {
-            document.querySelectorAll('.stat-number').forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-target'));
-                let current = 0;
-                const increment = target / 50;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        stat.textContent = target + (stat.textContent.includes('%') ? '%' : '');
-                        clearInterval(timer);
-                    } else {
-                        stat.textContent = Math.floor(current) + (stat.textContent.includes('%') ? '%' : '');
-                    }
-                }, 30);
-            });
-        }
-
-        // Enhanced Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    
-                    // Staggered animation for grid items
-                    if (entry.target.classList.contains('task-card')) {
-                        const delay = Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100;
-                        entry.target.style.transitionDelay = `${delay}ms`;
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Progressive Enhancement
-        document.addEventListener('DOMContentLoaded', () => {
-            // Observe elements for animations
-            document.querySelectorAll('.task-card, .stat-card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
-            });
-
-            // Initial stats animation
-            setTimeout(animateStats, 1000);
-
-            // Add keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === '1') showUnit('unit1', document.querySelector('[onclick*="unit1"]'));
-                if (e.key === '2') showUnit('unit2', document.querySelector('[onclick*="unit2"]'));
-            });
-
-            // Enhanced particle system
-            createAdvancedParticles();
-        });
-
-        // Advanced Particle System
-        function createAdvancedParticles() {
-            const particleContainer = document.createElement('div');
-            particleContainer.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: -1;
-            `;
-            document.body.appendChild(particleContainer);
-
-            function createParticle() {
-                const particle = document.createElement('div');
-                const size = Math.random() * 4 + 2;
-                const duration = Math.random() * 4000 + 3000;
-                const opacity = Math.random() * 0.5 + 0.1;
-                
-                particle.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    background: radial-gradient(circle, rgba(102, 126, 234, ${opacity}), transparent);
-                    border-radius: 50%;
-                    left: ${Math.random() * window.innerWidth}px;
-                    top: -10px;
-                    pointer-events: none;
-                `;
-                
-                particleContainer.appendChild(particle);
-
-                const animation = particle.animate([
-                    { 
-                        transform: 'translateY(-10px) scale(0)', 
-                        opacity: 0 
-                    },
-                    { 
-                        transform: `translateY(${window.innerHeight / 2}px) scale(1)`, 
-                        opacity: opacity 
-                    },
-                    { 
-                        transform: `translateY(${window.innerHeight + 10}px) scale(0)`, 
-                        opacity: 0 
-                    }
-                ], {
-                    duration: duration,
-                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-                });
-
-                animation.onfinish = () => particle.remove();
-            }
-
-            // Create particles at intervals
-            setInterval(createParticle, 2000);
-        }
-
-        // Theme Toggle (Advanced Feature)
+        // Theme Toggle
         function toggleTheme() {
-            const body = document.body;
-            const isDark = body.classList.contains('dark-theme');
-            
-            if (isDark) {
-                body.classList.remove('dark-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.classList.add('dark-theme');
+            document.body.classList.toggle('dark-theme');
+            const icon = document.querySelector('.theme-toggle i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.className = 'fas fa-sun';
                 localStorage.setItem('theme', 'dark');
+            } else {
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
             }
         }
 
-        // Load saved theme
+        // Load theme preference
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-theme');
+            document.querySelector('.theme-toggle i').className = 'fas fa-sun';
         }
 
-        // Performance Optimization
-        let ticking = false;
-        function updateScrollAnimations() {
-            // Throttle scroll animations for better performance
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    // Update scroll-based animations here
-                    ticking = false;
+        // Animate on Scroll
+        function animateOnScroll() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
                 });
-                ticking = true;
-            }
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.work-card, .stat-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(el);
+            });
         }
 
-        window.addEventListener('scroll', updateScrollAnimations, { passive: true });
-
-        // Add CSS for additional animations
-        const additionalStyles = document.createElement('style');
-        additionalStyles.textContent = `
-            @keyframes slideInRight {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
+        // Close modal on outside click
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
             }
-
-            @keyframes slideOutRight {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
-
-            /* Dark Theme Support */
-            .dark-theme {
-                --primary-color: #3b82f6;
-                --secondary-color: #2563eb;
-                --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-                --gradient-card: linear-gradient(145deg, #1f2937 0%, #111827 100%);
-            }
-
-            .dark-theme body {
-                background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-                color: #f8fafc;
-            }
-
-            .dark-theme .header,
-            .dark-theme .footer {
-                background: rgba(31, 41, 55, 0.95);
-            }
-
-            .dark-theme .task-card,
-            .dark-theme .stat-card,
-            .dark-theme .unit-header {
-                background: var(--gradient-card);
-                border: 1px solid rgba(55, 65, 81, 0.8);
-                color: #f8fafc;
-            }
-
-            .dark-theme .task-description,
-            .dark-theme .stat-label,
-            .dark-theme .header-subtitle,
-            .dark-theme .unit-header p {
-                color: #9ca3af;
-            }
-
-            /* Accessibility Improvements */
-            .task-link:focus,
-            .nav-tab:focus,
-            .social-link:focus {
-                outline: 2px solid var(--accent-color);
-                outline-offset: 2px;
-            }
-
-            /* Print Styles */
-            @media print {
-                .nav-tabs,
-                .social-links,
-                .bg-animation {
-                    display: none;
-                }
-                
-                body {
-                    background: white;
-                    color: black;
-                }
-                
-                .task-card,
-                .stat-card {
-                    box-shadow: none;
-                    border: 1px solid #ccc;
-                }
-            }
-
-            /* Reduced Motion */
-            @media (prefers-reduced-motion: reduce) {
-                *,
-                *::before,
-                *::after {
-                    animation-duration: 0.01ms !important;
-                    animation-iteration-count: 1 !important;
-                    transition-duration: 0.01ms !important;
-                    scroll-behavior: auto !important;
-                }
-            }
-        `;
-        document.head.appendChild(additionalStyles);
+        });
     </script>
 </body>
 </html>
