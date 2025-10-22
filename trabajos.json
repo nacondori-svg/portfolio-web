@@ -1,1 +1,16 @@
-
+[
+  {
+    "nombre": "T1 - Análisis de Superficie Agropecuaria en Puno",
+    "descripcion": "Informe técnico completo sobre el análisis espacial y estadístico de la superficie agropecuaria en el departamento de Puno. Incluye mapas coropléticos, clustering y análisis de densidad.",
+    "archivo": "T1_Posicionamiento_de_Información.pdf",
+    "fecha": "2025-10-22",
+    "unidad": 1
+  },
+  {
+    "nombre": "T1 - Aplicación Shiny: Dashboard Agropecuario",
+    "descripcion": "Aplicación interactiva en R Shiny para visualización de datos agropecuarios de Puno. Incluye mapas interactivos (coropléticos, clustering, heatmap), estadísticas descriptivas y gráficos dinámicos.",
+    "archivo": "app.R",
+    "fecha": "2025-10-22",
+    "unidad": 1
+  }
+]
